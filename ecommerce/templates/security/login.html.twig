@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Register{% endblock %}
+
+{% block body %}
+<form method="post">
+    {% if error %}
+        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+    {% endif %}
+
+
+    <h1 class="h3 mb-3 font-weight-normal d-flex justify-content-center pt-sm-5">Please sign in</h1>
+    <div class="d-flex justify-content-center pt-sm-5"><input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control w-25 " placeholder="Email" required autofocus></div>
+    <div class="d-flex justify-content-center pt-sm-3"><input type="password" name="password" id="inputPassword" class="form-control w-25" placeholder="Password" required></div>
+
+    <input type="hidden" name="_csrf_token"
+           value="{{ csrf_token('authenticate') }}">
+
+    <div class="d-flex justify-content-center pt-sm-3">
+    <button class="btn btn-lg btn-dark" type="submit" style="font-size: medium">
+        Sign in
+    </button>
+    </div>
+
+    <div class="d-flex justify-content-center pt-sm-3">
+    <a href='register' class="btn btn-dark ">Register</a>
+    </div>
+</form>
+{% endblock %}

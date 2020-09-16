@@ -1,0 +1,146 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Home {% endblock %}
+
+{% block stylesheets %}
+
+   <style>
+    html {
+    font-size: 1rem;
+    }
+    @media (min-width: 576px) {
+    html {
+    font-size: 0.6rem;
+    }
+    }
+    @media (min-width: 768px) {
+    html {
+    font-size: 0.8rem;
+    }
+    }
+    @media (min-width: 992px) {
+    html {
+    font-size: 1rem;
+    }
+    }
+   </style>
+{% endblock %}
+{% block body %}
+
+<body>
+    <div id="carousel" class="carousel slide" data-ride="carousel" style="z-index: 0">
+        <ol class="carousel-indicators">
+            <li data-target="#carousel" data-slide-to="0" class="active"></li>
+            <li data-target="#carousel" data-slide-to="1"></li>
+            <li data-target="#carousel" data-slide-to="2"></li>
+        </ol>
+        <div class="carousel-inner" role="listbox">
+            <div class="carousel-item active">
+                <a href = {{ path('showAllViaCategory', {'category': 'Keyboard'}) }}>
+                   <img class="d-block" src="https://cwsmgmt.corsair.com/responsive/img/k70-v2/shopnow_product1.png" alt="First slide"></a>
+                <div class="carousel-caption d-none d-md-block">
+                    <h3 class="display-4">Keyboards</h3>
+                </div>
+            </div>
+            <div class="carousel-item" role="listbox" >
+                <a href = {{ path('showAllViaCategory', {'category': 'Mouse'}) }}>
+                    <img class="d-block" src='images/mice.jpg' alt="Second slide"></a>
+                <div class="carousel-caption d-none d-md-block">
+                    <h3 class="display-4">Mice</h3>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <a href = {{ path('showAllViaCategory', {'category': 'Keyboard'}) }}>
+                    <img class="d-block" src="images/microphones.jpg" alt="Third slide"></a>
+                <div class="carousel-caption d-none d-md-block">
+                    <h3 class="display-4" style="color: black">Microphones</h3>
+                </div>
+            </div>
+
+        <a class="carousel-control-prev" href="#carousel" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carousel" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+    </div>
+    </div>
+
+<div class="container-fluid" style="max-width: 80%;">
+
+    {% if keyboards %}
+        <h1 class="my-4 d-flex justify-content-center">New Keyboards</h1>
+        <div class="row">
+            {% for keyboard in keyboards %}
+                <div class="col-lg-4 col-sm-6 mb-4 ">
+                    <div class="card h-100 shadow border-dark" style="padding:30px; background-color: lightgrey;">
+                        <a href="{{ path('showproduct', {product : keyboard.id}) }}"><img src="{{ asset('images/') ~keyboard.image }}" alt="" class="card-img-top" data-toggle="popover" title="{{ keyboard.brand }} {{ keyboard.model }}" data-content="{{keyboard.description}}"></a>
+                        <div class="card-body">
+                            <h4 class="card-title" style=" text-align: center" data-toggle="popover" title="{{ keyboard.brand }} {{ keyboard.model }}" data-content="{{ keyboard.description }}">
+                                <a href="{{ path('showproduct', {product : keyboard.id}) }}">{{ keyboard.name}}</a><div style="color: black; position:absolute; top:3px; right:10px" >£{{ keyboard.price }}</div>
+                            </h4>
+                            <p class="card-text"></p>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    {% if mice %}
+        <h1 class="my-4 d-flex justify-content-center">New Mice</h1>
+        <div class="row">
+            {% for mouse in mice %}
+                <div class="col-lg-4 col-sm-6 mb-4">
+                    <div class="card h-100 shadow border-dark" style="padding:30px; background-color: lightgrey;">
+                        <a href="{{ path('showproduct', {product : mouse.id}) }}"><img src="{{ asset('images/') ~mouse.image }}" alt="" class="card-img-top" data-toggle="popover" title="{{ mouse.brand }} {{ mouse.model }}" data-content="{{ mouse.description}}"></a>
+                        <div class="card-body">
+                            <h4 class="card-title" style="text-align: center" data-toggle="popover" title={{ mouse.brand }}&#32{{ mouse.model }} data-content="{{ mouse.description }}">
+                                <a href="{{ path('showproduct', {product : mouse.id}) }}">{{ mouse.name}}</a><div style="color: black; position:absolute; top:3px; right:10px" >£{{ mouse.price }}</div>
+                            </h4>
+                            <p class="card-text"></p>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    {% if microphones %}
+    <h1 class="my-4 d-flex justify-content-center">New Microphones</h1>
+    <div class="row">
+        {% for microphone in microphones %}
+        <div class="col-lg-4 col-sm-6 mb-4">
+            <div class="card h-100 shadow border-dark" style="padding:30px; background-color: lightgrey;">
+                <a href="{{ path('showproduct', {product : microphone.id}) }}"><img src="{{ asset('images/') ~microphone.image }}" alt="" class="card-img-top" data-toggle="popover" title="{{ microphone.brand }} {{ microphone.model }}" data-content="{{ microphone.description}}"></a>
+                <div class="card-body">
+                    <h4 class="card-title" style="text-align: center" data-toggle="popover" title={{ microphone.brand }}&#32{{ microphone.model }} data-content="{{ microphone.description }}">
+                        <a href="{{ path('showproduct', {product : microphone.id}) }}">{{ microphone.name}}</a><div style="color: black; position:absolute; top:3px; right:10px" >£{{ microphone.price }}</div>
+                    </h4>
+                    <p class="card-text"></p>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+
+</div>
+
+    <script type="text/javascript">
+        $(function()
+        {
+            $('[data-toggle="popover"]').popover({
+                placement: 'top',
+                trigger: 'hover',
+                container: 'body'
+            })
+        })
+    </script>
+
+
+</body>
+{% endblock %}

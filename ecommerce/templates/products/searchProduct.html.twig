@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Search{% endblock %}
+
+{% block body %}
+
+    {% for product in products %}
+
+        {{ product.name }}
+
+    {% endfor %}
+
+{% endblock %}

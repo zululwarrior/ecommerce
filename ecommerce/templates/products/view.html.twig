@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}View Product{% endblock %}
+
+{% block body %}
+    <h2 class="d-flex justify-content-center pt-3">{{product.name}}</h2>
+    <h1 class="d-flex justify-content-center"> £{{ product.price }}</h1>
+    <div class="d-flex justify-content-center pt-5"><img style = "height:50%; width:50%;" src={{ asset('images/') ~ product.image }}></div>
+
+    <p class="d-flex justify-content-center pt-5">{{ product.description }}</p>
+    {% if app.user%}
+        <a href = "#" id = "addBasket" class="btn btn-dark" style="float:right;"><b>Add to basket</b></a>
+    {% else %}
+        <a class="btn btn-dark" style="float:right;" href = '{{ path('app_login') }}'><b>Add to basket</b></a>
+    {% endif %}
+    <div><a class="btn btn-dark" href="/"><strong>Go Back</strong></a></div>
+
+{% endblock %}
+
+{% block javascripts %}
+
+    <script>
+
+        $("#addBasket").click(()=>{
+            confirm("Add to basket?") && $.post("{{ path('addbasket', {product:product.id})}}", (response)=>{
+                $("#basketCounter").html("(" + response + ")")
+            })
+        })
+    </script>
+
+{% endblock %}

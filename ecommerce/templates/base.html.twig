@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<style>
+
+    ::-webkit-scrollbar {
+        display: none;
+    }
+
+    .social:hover {
+        transform: scale(1.1);
+    }
+    .social {
+        transition-duration: 0.5s;
+        transform: scale(0.8)
+    }
+
+    #facebook:hover {
+        color: #3B5998;
+    }
+    #twitter:hover {
+        color: #4099FF;
+    }
+    #googleplus:hover {
+        color: #d34836;
+    }
+    #email:hover {
+        color: #f39c12;
+    }
+
+
+</style>
+<html>
+    <head>
+        <link rel="icon"
+              type="image/png"
+              href="https://cdn.frankerfacez.com/emoticon/256055/4">
+        <meta charset="UTF-8">
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        <link rel="stylesheet" href="{{ asset("build/app.css") }}">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <script
+                src="http://code.jquery.com/jquery-3.3.1.min.js"
+                integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+                crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+        <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+
+        {% block stylesheets %}{% endblock %}
+    </head>
+    <body style="background-color: lightgrey">
+      {{ include('inc/navbar.html.twig')}}
+
+      <div class="container">
+
+      {% block body %}{% endblock %}
+      </div>
+      <script src="{{ asset("build/runtime.js") }}"></script>
+      <script src="{{ asset("build/app.js") }}"></script>
+      {% block javascripts %}{% endblock %}
+    </body>
+    <div class="container">
+        <hr>
+        <div class="text-center center-block">
+            <br />
+            <a href="https://en-gb.facebook.com/CityUoLondon/"><i id="facebook" class="fa fa-facebook-square fa-3x social"></i></a>
+            <a href="https://twitter.com/CityUniLondon"><i id="twitter" class="fa fa-twitter-square fa-3x social"></i></a>
+            <a href="https://plus.google.com/discover"><i id="googleplus" class="fa fa-google-plus-square fa-3x social"></i></a>
+            <a href="mailto:p.w.h.smith@city.ac.uk"><i id="email" class="fa fa-envelope-square fa-3x social"></i></a>
+            <br/>
+            <div class="container w-50 d-flex justify-content-center">
+                We are an award winning electronics online business, dedicated to provide our customers with the highest quality
+                of electronic equipments.
+            </div>
+            <br/>
+            © PogU 2019. All Rights Reserved.
+        </div>
+        <hr>
+    </div>
+</html>

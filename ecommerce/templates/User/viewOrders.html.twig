@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+{% block title %}Orders{% endblock%}
+
+{% block body %}
+    <h1 class="h3 mb-3 font-weight-normal">Hi {{ app.user.firstName|capitalize }} {{ app.user.lastName|capitalize }}</h1>
+    <h1 class="h3 mb-3 font-weight-normal">All orders</h1>
+
+    {% if orders | length > 0%}
+        {% for order in orders%}
+        <table id = "productcats" class="table table-striped">
+        <thead>
+        <tr>
+            <th>Order ID</th>
+            <th>Product Name</th>
+            <th>Product Price</th>
+            <th>Quantity</th>
+            <th>Total Price</th>
+            <th>Postcode</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for orderRow in order.getOrderRows %}
+            <tr>
+                <td>{{ orderRow.eorder.id}}</td>
+                <td>{{ orderRow.productBrand}} {{orderRow.productModel}} {{orderRow.productCategory}}</td>
+                <td>{{ orderRow.price }}</td>
+                <td>{{ orderRow.quantity }}</td>
+                <td>{{ orderRow.quantityPrice }}</td>
+                <td>{{ order.postcode }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+        {% endfor %}
+    {% else %}
+        <p>No orders made</p>
+    {% endif %}
+{% endblock %}

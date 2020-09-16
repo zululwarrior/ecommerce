@@ -1,0 +1,65 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ app.user.email }}{% endblock %}
+{% block body %}
+
+    <h1 class="h3 mb-3 font-weight-normal">Hi {{ app.user.email }}</h1>
+
+    {{form_start(form)}}
+    {{form_widget(form)}}
+    {{form_end(form)}}
+    <a href = "{{ path('newproduct') }}">Add new product</a>
+
+    {% if products %}
+        <table id = "products" class="table table-striped">
+            <thead>
+            <tr>
+                <th>Product Image</th>
+                <th>Product Category</th>
+                <th>Product Brand</th>
+                <th>Product Model</th>
+                <th>Product Description</th>
+                <th>Product Price</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for product in products %}
+                <tr>
+                    <td><img class="card-img-top" src="{{ asset('images/') ~product.image}}" alt="" style="height:50px; width:50px"></td>
+                    <td>{{product.category}}</td>
+                    <td>{{product.brand}}</td>
+                    <td>{{ product.model}}</td>
+                    <td>{{ product.description}}</td>
+                    <td>{{ product.price }}</td>
+                    <td>
+                        <a href ="/admin/editproduct/{{product.id}}" class = "btn btn-dark">Edit</a>
+                        <a href ="/viewproducts/delete/{{ product.id }}" class = "btn btn-danger delete-product"
+                           data-id="{{product.id}}">Delete</a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p> No products to display</p>
+    {% endif %}
+{% endblock %}
+
+
+{% block javascripts %}
+    <script>
+        const products = document.getElementById('products');
+        if(products){
+            products.addEventListener('click', e => {
+                if (e.target.className === 'btn btn-danger delete-product'){
+                    if(confirm('Are you sure?')){
+                        const id = e.target.getAttribute('data-id');
+                        alert(id);
+                        fetch(`/viewproducts/delete/${id}`,
+                            {method: 'DELETE'}).then(res => window.location.reload());
+                    }
+                }
+            });
+        }</script>
+{% endblock %}

@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+{% block title %}Account{% endblock%}
+{% block body %}
+    <h1 class="h3 mb-3 font-weight-normal">Hi {{ app.user.firstName|capitalize }} {{ app.user.lastName|capitalize }}</h1>
+    <a href = "{{ path("editAccount")}}"class="btn btn-outline-dark" > Edit account</a>
+
+    <hr>
+    <a href = "{{ path("viewOrders")}}"class="btn btn-outline-dark" > View orders</a>
+
+{% endblock %}

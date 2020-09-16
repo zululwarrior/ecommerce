@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}View Product{% endblock %}
+
+{% block body %}
+
+    <div class="container-fluid" style="max-width: 80%;">
+
+        {% if products %}
+        <h1 class="my-4 d-flex justify-content-center">All {{ category }}s</h1>
+        <div class="row">
+            {% for product in products %}
+                <div class="col-lg-4 col-sm-6 mb-4">
+                    <div class="card h-100 shadow border-dark" style="padding:30px; background-color: lightgrey;">
+                        <a href="{{ path('showproduct', {product : product.id}) }}"><img src="{{ asset('images/') ~product.image }}" alt="" class="card-img-top" data-toggle="popover" title="{{ product.brand }} {{ product.model }}" data-content="{{product.description}}"></a>
+                        <div class="card-body">
+                            <h4 class="card-title" style="text-align: center" data-toggle="popover" title="{{ product.brand }} {{ product.model }}" data-content="{{ product.description }}">
+                                <a href="{{ path('showproduct', {product : product.id}) }}">{{ product.name}}</a><div style="color: black; position:absolute; top:3px; right:10px" >£{{ product.price }}</div>
+                            </h4>
+                            <p class="card-text"></p>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+            {% endif %}
+
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        $(function()
+        {
+            $('[data-toggle="popover"]').popover({
+                placement: 'top',
+                trigger: 'hover',
+                container: 'body'
+            })
+        })
+    </script>
+{% endblock %}
